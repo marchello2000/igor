@@ -172,6 +172,24 @@ class BuildController {
   }
 
 
+  @RequestMapping(value = '/builds/description/{buildNumber}/{master:.+}/**', method = RequestMethod.PUT)
+  @PreAuthorize("hasPermission(#master, 'BUILD_SERVICE', 'WRITE')")
+  Map<String, Object> setDescription(
+    @PathVariable String master,
+    @PathVariable Integer buildNumber,
+    @RequestBody String description,
+    HttpServletRequest request) {
+
+    def job = ((String) request.getAttribute(
+      HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)).split('/').drop(5).join('/')
+
+    def buildService = getBuildService(master)
+    if (buildService instanceof JenkinsService) {
+      JenkinsService jenkinsService = (JenkinsService) buildService
+      jenkinsService.setDescription(job, buildNumber, description)
+    }
+  }
+
   @RequestMapping(value = '/masters/{name}/jobs/**', method = RequestMethod.PUT)
   @PreAuthorize("hasPermission(#master, 'BUILD_SERVICE', 'WRITE')")
   ResponseEntity<String> build(

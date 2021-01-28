@@ -337,4 +337,9 @@ class WerckerService implements BuildOperations {
     JobConfiguration getJobConfig(String jobName) {
         return new GenericJobConfiguration('WerckerPipeline ' + jobName, jobName)
     }
+
+    @Override
+    void setBuildDescription(String jobName, Integer buildNumber, String description) {
+        // Not supported, don't throw just NOOP
+    }
 }

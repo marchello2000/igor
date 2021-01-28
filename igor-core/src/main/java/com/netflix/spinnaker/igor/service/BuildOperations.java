@@ -63,6 +63,14 @@ public interface BuildOperations extends BuildService {
    */
   List<?> getBuilds(String job);
 
+  /**
+   * Set description of the build, if the service supports it
+   * @param job The name of the job
+   * @param buildNumber The build number
+   * @param description the description for the build (can be html)
+   */
+  void setBuildDescription(String jobName, Integer buildNumber, String description);
+
   JobConfiguration getJobConfig(String jobName);
 
   default Object queuedBuild(String master, int item) {

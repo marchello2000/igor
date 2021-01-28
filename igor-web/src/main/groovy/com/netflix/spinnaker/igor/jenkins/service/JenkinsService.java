@@ -358,4 +358,10 @@ public class JenkinsService implements BuildOperations, BuildProperties {
     ScmDetails scmDetails = getGitDetails(job, build.getNumber());
     return scmDetails.genericGitRevisions();
   }
+
+  @Override
+  public void setBuildDescription(String jobName, Integer buildNumber, String description) {
+    circuitBreaker.executeSupplier(
+      () -> jenkinsClient.setDescription(jobName, buildNumber, description));
+  }
 }

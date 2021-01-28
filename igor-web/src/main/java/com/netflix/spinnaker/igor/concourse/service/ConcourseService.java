@@ -339,6 +339,11 @@ public class ConcourseService implements BuildOperations, BuildProperties {
     throw new UnsupportedOperationException("getJobConfig is not yet implemented for Concourse");
   }
 
+  @Override
+  public void setBuildDescription(String jobName, Integer buildNumber, String description) {
+    // Not supported, don't throw just NOOP
+  }
+
   public List<Build> getBuilds(String jobPath, @Nullable Long since) {
     Job job = toJob(jobPath);
 

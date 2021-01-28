@@ -529,6 +529,11 @@ public class TravisService implements BuildOperations, BuildProperties {
     return null;
   }
 
+  @Override
+  public void setBuildDescription(String jobName, Integer buildNumber, String description) {
+    // Not supported, don't throw just NOOP
+  }
+
   public void syncRepos() {
     try {
       travisClient.usersSync(getAccessToken(), new EmptyObject());

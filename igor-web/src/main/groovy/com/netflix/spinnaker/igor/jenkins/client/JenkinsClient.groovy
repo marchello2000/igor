@@ -75,6 +75,10 @@ interface JenkinsClient {
     @POST('/queue/cancelItem')
     Response stopQueuedBuild(@Query('id') String queuedBuild, @Body String emptyRequest, @Header("Jenkins-Crumb") String crumb)
 
+    @FormUrlEncoded
+    @POST('/job/{jobName}/{buildNumber}/submitDescription')
+    Response setDescription(@EncodedPath('jobName') String jobName, @Path('buildNumber') Integer buildNumber, @Field("description")
+
     @GET('/job/{jobName}/api/xml?exclude=/*/action&exclude=/*/build&exclude=/*/property[not(parameterDefinition)]')
     JobConfig getJobConfig(@EncodedPath('jobName') String jobName)
 

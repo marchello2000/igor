@@ -93,6 +93,11 @@ public class GitlabCiService implements BuildOperations {
     return permissions;
   }
 
+  @Override
+  public void setBuildDescription(String jobName, Integer buildNumber, String description) {
+    // Not supported, don't throw just NOOP
+  }
+
   public List<Project> getProjects() {
     return getProjectsRec(new ArrayList<>(), 1);
   }
